@@ -1,0 +1,48 @@
+name: Build Consumer App
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # 2️⃣ Authenticate to GitHub Packages
+      - name: Authenticate to GitHub Packages
+        run: |
+          dotnet nuget add source \
+            --username GitHub \
+            --password ${{ secrets.GITHUB_TOKEN }} \
+            --store-password-in-clear-text \
+            --name github \
+            https://nuget.pkg.github.com/rkj-devops-labs-1/index.json
+
+      # 3️⃣ Setup .NET
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 10.0.x
+
+      # 4️⃣ Restore .NET project (NuGet packages)
+      - name: Restore
+        run: dotnet restore Az400.Consumer.App/Az400.Consumer.App.csproj
+
+      # 5️⃣ Build
+      - name: Build
+        run: dotnet build Az400.Consumer.App/Az400.Consumer.App.csproj --configuration Release
+
+      # 6️⃣ Optional: run tests if any
+      - name: Test
+        run: dotnet test Az400.Consumer.App/Az400.Consumer.App.csproj --no-build
