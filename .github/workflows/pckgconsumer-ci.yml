@@ -19,15 +19,16 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      # No `dotnet nuget add/remove/update source` inside yml file
       # 2️⃣ Authenticate to GitHub Packages
-      - name: Authenticate to GitHub Packages
-        run: |
-          dotnet nuget add source \
-            --username GitHub \
-            --password ${{ secrets.GITHUB_TOKEN }} \
-            --store-password-in-clear-text \
-            --name github \
-            https://nuget.pkg.github.com/rkj-devops-labs-1/index.json
+      #- name: Authenticate to GitHub Packages
+      #  run: |
+      #    dotnet nuget add source \
+      #      --username GitHub \
+      #      --password ${{ secrets.GITHUB_TOKEN }} \
+      #      --store-password-in-clear-text \
+      #      --name github \
+      #      https://nuget.pkg.github.com/rkj-devops-labs-1/index.json
 
       # 3️⃣ Setup .NET
       - name: Setup .NET
