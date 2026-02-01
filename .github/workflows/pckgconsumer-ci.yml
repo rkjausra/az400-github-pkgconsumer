@@ -42,8 +42,8 @@ jobs:
       # Specify "%NUGET_AUTH_TOKEN%" as password
       # in nuget.config <packageSourceCredentials> section
       - name: Restore dependencies
-        #env:
-          #NUGET_AUTH_TOKEN: ${{ secrets.NUGET_PAT_PKGCONSUMER }}
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_PAT_PKGCONSUMER }}
         run: dotnet restore Az400.Consumer.App/Az400.Consumer.App.csproj
 
       # 5️⃣ Build
