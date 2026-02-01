@@ -37,7 +37,7 @@ cd Az400.Consumer.App
 
    - use PAT for Local Development
       - pat_for_stage-5-19_lab_on_package_consumer
-      - `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`
+      - `ghp_k6ljnVgXEM<confuse-github>GjQOqsijeNTrQIrfF78816rs2D`
 
 ```bash
 # Never commit PATs
